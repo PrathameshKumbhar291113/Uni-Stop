@@ -8,5 +8,11 @@ class UniversityListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_university_list)
+
+        setupUi()
+    }
+
+    private fun setupUi() {
+        window.statusBarColor = getColor(R.color.red)
     }
 }
