@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/showUniversityListFragment">
+
+    <fragment
+        android:id="@+id/showUniversityListFragment"
+        android:name="com.unistop.show_university_list_feature.presentation.fragment.ShowUniversityListFragment"
+        android:label="fragment_show_university_list"
+        tools:layout="@layout/fragment_show_university_list" />
+    <fragment
+        android:id="@+id/showUniversityDetailFragment"
+        android:name="com.unistop.show_university_details_feature.ShowUniversityDetailFragment"
+        android:label="fragment_show_university_detail"
+        tools:layout="@layout/fragment_show_university_detail" />
+</navigation>

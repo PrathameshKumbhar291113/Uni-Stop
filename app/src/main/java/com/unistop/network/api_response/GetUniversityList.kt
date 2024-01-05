@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-data class GetUniversityList(
+data class GetUniversityListResponse(
     @SerializedName("alpha_two_code")
     var alphaTwoCode: String?, // US
     @SerializedName("country")

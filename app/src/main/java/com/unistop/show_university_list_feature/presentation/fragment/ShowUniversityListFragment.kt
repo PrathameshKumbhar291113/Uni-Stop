@@ -1,60 +1,139 @@
 package com.unistop.show_university_list_feature.presentation.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.unistop.R
+import com.unistop.databinding.FragmentShowUniversityListBinding
+import com.unistop.network.api_response.GetUniversityListResponse
+import com.unistop.show_university_list_feature.presentation.adapter.UniversityListAdapter
+import com.unistop.show_university_list_feature.presentation.view_model.ShowUniversityListViewModel
+import com.unistop.utils.NetworkResult
+import dagger.hilt.android.AndroidEntryPoint
+import splitties.fragments.start
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ShowUniversityListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class ShowUniversityListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding : FragmentShowUniversityListBinding
+    private val universityListViewModel: ShowUniversityListViewModel by activityViewModels()
+    private lateinit var universityAdapter: UniversityListAdapter
+
+    companion object{
+        const val UNIVERSITY_DATA = "university_data"
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_show_university_list, container, false)
+         binding = FragmentShowUniversityListBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ShowUniversityListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ShowUniversityListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupUi()
+        setUpObserver()
+    }
+
+    private fun setUpObserver() {
+
+        universityListViewModel.getUniversityList.observe(viewLifecycleOwner) {
+            when (it) {
+                is NetworkResult.Loading -> {
+                    binding.circularProgressBar.isVisible = true
+                    binding.universityRecyclerView.isVisible = false
+                }
+                is NetworkResult.Success -> {
+                    binding.circularProgressBar.isVisible = false
+                    binding.universityRecyclerView.isVisible = true
+                    it.data?.body()?.let { universityList ->
+                        setupRecyclerView(universityList)
+                    }
+                }
+
+                is NetworkResult.Error -> {
+                    binding.circularProgressBar.isVisible = false
+                    binding.universityRecyclerView.isVisible = true
                 }
             }
+
+        }
     }
+
+    private fun setupUi() {
+        handleOnBackPress()
+        setUpSearchFeature()
+        setupFloatingActionButton()
+    }
+
+    private fun setupFloatingActionButton() {
+        binding.searchUniversityByName.setOnClickListener {
+            binding.searchUniversity.isVisible = !binding.searchUniversity.isVisible
+        }
+    }
+
+    private fun setUpSearchFeature() {
+        binding.searchUniversity.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText!!.isEmpty()){
+                    universityListViewModel.getUniversityList("United States")
+                }else{
+                    universityListViewModel.getUniversityList(newText.toString())
+                }
+
+                return true
+            }
+        })
+    }
+
+    private fun setupRecyclerView(productList: List<GetUniversityListResponse>) {
+        universityAdapter = UniversityListAdapter(productList, this::onClick)
+        binding.universityRecyclerView.adapter = universityAdapter
+    }
+
+    private fun onClick(data: GetUniversityListResponse) {
+        val universityDataBundle: Bundle = Bundle().apply {
+            putParcelable(UNIVERSITY_DATA, data)
+        }
+
+        findNavController().navigate(R.id.showUniversityDetailFragment, universityDataBundle)
+
+    }
+
+
+    private fun handleOnBackPress() {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finish()
+                }
+            })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (binding.searchUniversity.query.isEmpty()){
+            universityListViewModel.getUniversityList("United States")
+        }
+    }
+
 }

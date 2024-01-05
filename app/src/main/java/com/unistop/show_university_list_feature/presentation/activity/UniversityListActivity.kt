@@ -3,7 +3,9 @@ package com.unistop.show_university_list_feature.presentation.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.unistop.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class UniversityListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

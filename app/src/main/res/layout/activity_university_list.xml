@@ -6,4 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".show_university_list_feature.presentation.activity.UniversityListActivity">
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/red"
+        android:fontFamily="monospace"
+        android:paddingStart="30dp"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivShoppingBag"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toStartOf="@+id/toolBar"
+        app:layout_constraintTop_toTopOf="@+id/toolBar"
+        app:srcCompat="@drawable/iv_splash2" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolBar"
+        app:layout_constraintVertical_bias="0.0"
+        app:navGraph="@navigation/nav_graph"
+        tools:layout="@layout/fragment_show_university_list" />
 </androidx.constraintlayout.widget.ConstraintLayout>

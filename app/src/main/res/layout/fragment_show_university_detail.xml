@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_search_view_gradient"
+    tools:context=".show_university_details_feature.ShowUniversityDetailFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginVertical="20dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/splashImg"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:padding="50dp"
+            android:layout_marginTop="20dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            app:layout_constraintBottom_toTopOf="@id/splashTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:srcCompat="@drawable/iv_splash2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:textStyle="bold"
+            android:text="UniStop"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="35dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:textStyle="bold"
+            android:text="Get your Universitiy details here."
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/showUniversityNameTitle"
+                android:textStyle="bold"
+                android:text="Name:"
+                android:fontFamily="serif-monospace"
+                android:textColor="@color/red"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/showUniversityNameValue"
+                android:textStyle="normal"
+                tools:text="Name"
+                android:fontFamily="serif-monospace"
+                android:layout_weight="1"
+                android:textColor="@color/red"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/showUniversityCountryTitle"
+                android:textStyle="bold"
+                android:text="Country:"
+                android:fontFamily="serif-monospace"
+                android:textColor="@color/red"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/showUniversityCountryValue"
+                android:textStyle="normal"
+                tools:text="Name"
+                android:fontFamily="serif-monospace"
+                android:layout_weight="1"
+                android:textColor="@color/red"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/showUniversityCountryCodeTitle"
+                android:textStyle="bold"
+                android:text="Country Code:"
+                android:fontFamily="serif-monospace"
+                android:textColor="@color/red"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/showUniversityCountryCodeValue"
+                android:textStyle="normal"
+                tools:text="Name"
+                android:fontFamily="serif-monospace"
+                android:layout_weight="1"
+                android:textColor="@color/red"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/showUniversityWebsiteTitle"
+                android:textStyle="bold"
+                android:text="Website:"
+                android:textColor="@color/red"
+                android:fontFamily="serif-monospace"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/showUniversityWebsiteValue"
+                android:textStyle="normal"
+                tools:text="Name"
+                android:fontFamily="serif-monospace"
+                android:layout_weight="1"
+                android:textColor="@color/red"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
